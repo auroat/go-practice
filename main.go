@@ -12,6 +12,6 @@ func main() {
 	// tuple-overview
 	var square int
 	var cube int
-	square, cube = TupleOverview(3)
+	square, cube, _ = TupleOverview(3)
 	fmt.Println("Square result:", square, "\nCube result:", cube)
 }
