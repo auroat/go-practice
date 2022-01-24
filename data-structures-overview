@@ -1,0 +1,7 @@
+Data structures classification:
+
+Liner: lists, sets, tuples, queues, stacks and heaps
+Non-Linear: trees, tables and containers
+Homogeneous: 2d arrays and multiDArrays
+Heterogeneous: linked lists, ordered lists and unordered lists
+Dynamic: dictionaries, treeSets and sequences
