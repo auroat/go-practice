@@ -84,6 +84,20 @@ func UpdateCustomer(customer Customer) {
 	defer database.Close()
 }
 
+// Delete Customer method with parameter customer
+func deleteCustomer(customer Customer) {
+	var database *sql.DB
+	database = GetConnection()
+	var error error
+	var delete *sql.Stmt
+	delete, error = database.Prepare("DELETE FROM Customer WHERE Customerid=?")
+	if error != nil {
+		panic(error.Error())
+	}
+	delete.Exec(customer.CustomerId)
+	defer database.Close()
+}
+
 func main() {
 	var customers []Customer
 	customers = GetCustomers()
@@ -95,4 +109,7 @@ func main() {
 	UpdateCustomer(customer)
 	customers = GetCustomers()
 	fmt.Println("After Update", customers)
+	deleteCustomer(customer)
+	customers = GetCustomers()
+	fmt.Println("After Delete", customers)
 }
