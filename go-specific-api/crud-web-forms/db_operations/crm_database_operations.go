@@ -27,3 +27,31 @@ func GetConnection() (database *sql.DB) {
 	}
 	return database
 }
+
+//GetCustomerById with parameter customerId returns Customer
+func GetCustomerById(customerId int) Customer {
+	var database *sql.DB
+	database = GetConnection()
+	var error error
+	var rows *sql.Rows
+	rows, error = database.Query("SELECT * FROM Customer WHERE CustomerId=?", customerId)
+	if error != nil {
+		panic(error.Error())
+	}
+	var customer Customer
+	customer = Customer{}
+	for rows.Next() {
+		var customerId int
+		var customerName string
+		var SSN string
+		error = rows.Scan(&customerId, &customerName, &SSN)
+		if error != nil {
+			panic(error.Error())
+		}
+		customer.CustomerId = customerId
+		customer.CustomerName = customerName
+		customer.SSN = SSN
+	}
+
+	return customer
+}
