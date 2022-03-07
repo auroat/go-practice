@@ -101,3 +101,31 @@ func InsertCustomer(customer Customer) {
 	insert.Exec(customer.CustomerName, customer.SSN)
 	defer database.Close()
 }
+
+// Update Customer method with parameter customer
+func UpdateCustomer(customer Customer) {
+	var database *sql.DB
+	database = GetConnection()
+	var error error
+	var update *sql.Stmt
+	update, error = database.Prepare("UPDATE CUSTOMER SET CustomerName=?, SSN=? WHERE CustomerId=?")
+	if error != nil {
+		panic(error.Error())
+	}
+	update.Exec(customer.CustomerName, customer.SSN, customer.CustomerId)
+	defer database.Close()
+}
+
+// Delete Customer method with parameter customer
+func DeleteCustomer(customer Customer) {
+	var database *sql.DB
+	database = GetConnection()
+	var error error
+	var delete *sql.Stmt
+	delete, error = database.Prepare("DELETE FROM Customer WHERE CustomerId=?")
+	if error != nil {
+		panic(error.Error())
+	}
+	delete.Exec(customer.CustomerId)
+	defer database.Close()
+}
