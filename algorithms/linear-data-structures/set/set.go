@@ -32,6 +32,20 @@ func (set *Set) ContainsElement(element int) bool {
 	return exists
 }
 
+// Returns the set which intersects with anotherSet
+func (set *Set) Intersect(anotherSet *Set) *Set {
+	var intersectSet = &Set{}
+	intersectSet.New()
+	var value int
+
+	for value = range set.integerMap {
+		if anotherSet.ContainsElement(value) {
+			intersectSet.AddElement(value)
+		}
+	}
+	return intersectSet
+}
+
 func main() {
 	var set *Set
 	set = &Set{}
