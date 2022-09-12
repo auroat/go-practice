@@ -8,8 +8,7 @@ import (
 
 // Customer Class
 type Customer struct {
-	CustomerId
-	int
+	CustomerId   int
 	CustomerName string
 	SSN          string
 }
